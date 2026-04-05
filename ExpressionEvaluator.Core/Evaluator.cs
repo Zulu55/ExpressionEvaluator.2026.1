@@ -5,6 +5,13 @@ public class Evaluator
     public static double Evaluate(string infix)
     {
 
+        infix = infix.Trim();
+
+        var operators = new HashSet<char> { '+', '-', '*', '/', '^' };
+
+        if (!infix.Any(operators.Contains))
+            return double.Parse(infix);
+
         var parts = ExtractParts(infix);
         var postfix = InfixToPostfix(parts);
         return EvaluatePostfix(postfix);
